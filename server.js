@@ -4,9 +4,11 @@ const userRoutes = require("./routes/api/userRoutes");
 const authRoutes = require("./routes/api/authRoutes");
 const profileRoutes = require("./routes/api/profileRoutes");
 const postRoutes = require("./routes/api/postRoutes");
-const keys = require("./config/dev");
 const path = require('path');
 require("./data/db");
+
+//variables default
+const PORT = process.env.PORT || 8080;
 
 //Intanstiate app
 const app = express();
@@ -27,7 +29,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-//listen server on port
-app.listen(keys.port, () => {
-  console.log("Listening on port 8080");
+//listen server
+app.listen(PORT, () => {
+  console.log("Listening on port " + PORT);
 });
