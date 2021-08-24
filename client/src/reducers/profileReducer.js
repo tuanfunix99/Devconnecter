@@ -3,7 +3,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const profileState = {
-    profile:{}
+    profile:{},
+    isProfile: false
 }
 
 const profileSlice = createSlice({
@@ -11,15 +12,21 @@ const profileSlice = createSlice({
     initialState: profileState,
     reducers: {
         getprofile: (state, action) => {
+            let checkprofile = false;
+            if(action.payload.skills.length > 0){
+                checkprofile = true;
+            }
             return {
                 ...state,
                 profile: action.payload,
+                isProfile: checkprofile,
             }
         },
         createProfile: (state, action) => {
             return {
                 ...state,
                 profile: action.payload,
+                isProfile: true,
             }
         }
     }

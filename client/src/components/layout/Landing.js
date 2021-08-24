@@ -12,7 +12,7 @@ const Landing = () => {
             other developers
           </p>
           <div className="buttons">
-            <Link className="btn btn-light" to="/register">
+            <Link className="btn btn-primary" to="/register">
               Sign Up
             </Link>
             <Link to="/login" className="btn btn-light">
