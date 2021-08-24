@@ -5,6 +5,7 @@ import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from './components/layout/Dashboard';
+import Verify from "./components/auth/Verify";
 import { useDispatch } from 'react-redux';
 import allActions from "./actions/allActions";
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" exact component={Landing} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
+          <Route path="/verify" exact component={Verify} />
           <Route path="/dashboard" exact component={Dashboard} />
         </Switch>
       </Fragment>

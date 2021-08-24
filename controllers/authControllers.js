@@ -17,6 +17,16 @@ exports.login = async (req, res, next) => {
   try {
     const user = await User.matchPassword(req.body.email, req.body.password);
 
+    //check verify
+    if(!user.verify){
+      return res
+      .status(401)
+      .send({
+        message:
+          "you not verify your email, please check your email and verify",
+      });
+    }
+
     //check token
     if (user.tokens.length <= 0) {
       const token = await user.setToken();

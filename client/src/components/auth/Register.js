@@ -14,6 +14,8 @@ const Register = () => {
     password2: "",
   });
 
+  const[create, setCreate] = useState(false);
+
   const changeFormValue = (e) => {
     setFormData((pre) => {
       return { ...pre, [e.target.name]: e.target.value };
@@ -26,14 +28,16 @@ const Register = () => {
       return;
     }
     dispatch(allActions.authAction.createUser(formData));
+    setCreate(true);
   };
 
-  if (register.isAuthenticated) {
-    return <Redirect to="/dashboard" />
+  if (register.createSucess) {
+    return <Redirect to="/Verify" />
   }
 
   return (
     <section className="container">
+      {create && <div className="alert alert-primary">Creating...</div>}
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account
