@@ -88,7 +88,7 @@ userSchema.pre("save", function (next) {
   const avatar = gravatar.url(user.email, {
     s: "200",
     r: "pg",
-    d: "404",
+    d: "mm",
   });
   user.avatar = avatar;
   next();
