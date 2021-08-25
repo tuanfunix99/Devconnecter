@@ -5,9 +5,9 @@ import { Redirect } from "react-router-dom";
 const Verify = () => {
   const auth = useSelector((state) => state.auth);
 
-    if (!auth.createSucess) {
-      return <Redirect to="/Register" />;
-    }
+  if (!auth.createSucess) {
+    return <Redirect to="/Register" />;
+  }
   return (
     <section className="container">
       <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -158,7 +158,6 @@ const Verify = () => {
                                             borderRadius: "3px",
                                             textDecoration: "none",
                                           }}
-                                          target="_blank"
                                         >
                                           Check Your Email
                                         </a>
