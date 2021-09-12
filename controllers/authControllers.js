@@ -19,12 +19,9 @@ exports.login = async (req, res, next) => {
 
     //check verify
     if(!user.verify){
-      return res
-      .status(401)
-      .send({
-        message:
-          "you not verify your email, please check your email and verify",
-      });
+      throw new Error(
+        "you not verify your email, please check your email and verify"
+      );
     }
 
     //check token

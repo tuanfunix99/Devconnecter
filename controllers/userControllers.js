@@ -18,8 +18,8 @@ let transporter = nodemailer.createTransport({
 
 //controller create new user
 exports.postUser = async (req, res, next) => {
-  const user = new User(req.body);
   try {
+    const user = new User(req.body);
     const tokenVerify = TokenVerify();
     user.verifyToken = tokenVerify;
     await user.save();
@@ -33,7 +33,6 @@ exports.postUser = async (req, res, next) => {
         keys.root_domain + "/api/user/" + tokenVerify + "/" + user._id
       ), // html body
     });
-
     res.status(201).send({ token: token });
   } catch (err) {
     res.status(400).send(err.message);

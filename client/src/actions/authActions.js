@@ -7,8 +7,11 @@ const createUser = ({ name, email, password}) => async (dispatch) => {
   try {
     const { data } = await register(user);
     return dispatch(authActions.registerSuccess(data));
-  } catch (error) {
+  } catch (e) {
     authActions.authFail();
+    if(e.response && e.response.data){
+      alert(e.response.data);
+    }
   }
 };
 
@@ -30,8 +33,11 @@ const login = ({ email, password }) => async (dispatch) => {
   try {
     const { data } = await loginApi(user);
     return dispatch(authActions.login(data));
-  } catch (error) {
+  } catch (e) {
     authActions.authFail();
+    if(e.response && e.response.data){
+      alert(e.response.data);
+    }
   }
 };
 const authAction = {

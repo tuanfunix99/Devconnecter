@@ -19,8 +19,6 @@ const Dashboard = () => {
     return <Redirect to="/login" />;
   }
 
-  console.log(auth);
-
   const onSubmit = (profile) => {
     dispatch(allActions.profileAction.createProfileUser(profile));
   }

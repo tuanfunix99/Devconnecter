@@ -43,8 +43,8 @@ exports.postProfile = async (req, res, next) => {
   if (req.body.githubusername)
     profileFields.githubusername = req.body.githubusername;
   // Skills - Spilt into array
-  if (typeof req.body.skills !== "undefined") {
-    profileFields.skills = req.body.skills.split(",");
+  if (typeof req.body.skills != "undefined") {
+    profileFields.skills = req.body.skills.trim().split(",");
   }
 
   // Social

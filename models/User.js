@@ -1,7 +1,7 @@
 //Dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const validator = require("express-validator");
+const validator = require("validator");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -13,7 +13,7 @@ const userSchema = new Schema(
     name: {
       type: String,
       required: true,
-      validator: (value) => {
+      validate(value){
         if (validator.isEmpty(value)) {
           throw new Error("name is required");
         }
@@ -23,19 +23,19 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      validator: (value) => {
+      validate(value){
         if (validator.isEmpty(value)) {
           throw new Error("email is required");
         } else if (!validator.isEmail(value)) {
-          throw new Error("email is valid");
+          throw new Error("email is not valid");
         }
       },
     },
     password: {
       type: String,
       required: true,
-      min: [6, "Please enter password with 6 characters or more"],
-      validator: (value) => {
+      minlength: 7,
+      validate(value){
         if (validator.isEmpty(value)) {
           throw new Error("password is required");
         }

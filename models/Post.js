@@ -13,7 +13,7 @@ const postSchema = new Schema(
     text: {
       type: String,
       required: true,
-      validator: (value) => {
+      validate(value){
         if (validator.isEmpty(value)) {
           throw new Error("text is required");
         }
@@ -42,7 +42,7 @@ const postSchema = new Schema(
         text: {
           type: String,
           required: true,
-          validator: (value) => {
+          validate(value){
             if (validator.isEmpty(value)) {
               throw new Error("text is required");
             }

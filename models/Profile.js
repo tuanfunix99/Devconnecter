@@ -1,7 +1,7 @@
 //Dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const validator = require("express-validator");
+const validator = require("validator");
 
 //create profileSchema
 const profileSchema = new Schema(
@@ -27,20 +27,15 @@ const profileSchema = new Schema(
     status: {
       type: String,
       required: true,
-      validator: (value) => {
-        if (validator.isEmpty(value)) {
-          throw new Error("status is required");
-        }
-      },
     },
     skills: {
       type: [String],
       required: true,
-      validator: (value) => {
-        if (validator.isEmpty(value)) {
-          throw new Error("skills is required");
+      validate(value){
+        if(value.length <= 0){
+          throw new Error("Skills is required")
         }
-      },
+      }
     },
     bio: {
       type: String,
@@ -53,20 +48,10 @@ const profileSchema = new Schema(
         title: {
           type: String,
           required: true,
-          validator: (value) => {
-            if (validator.isEmpty(value)) {
-              throw new Error("title is required");
-            }
-          },
         },
         company: {
           type: String,
           required: true,
-          validator: (value) => {
-            if (validator.isEmpty(value)) {
-              throw new Error("company is required");
-            }
-          },
         },
         location: {
           type: String,
@@ -74,11 +59,6 @@ const profileSchema = new Schema(
         from: {
           type: Date,
           required: true,
-          validator: (value) => {
-            if (validator.isEmpty(value)) {
-              throw new Error("from is required");
-            }
-          },
         },
         to: {
           type: Date,

@@ -6,12 +6,10 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from './components/layout/Dashboard';
 import Verify from "./components/auth/Verify";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import allActions from "./actions/allActions";
 
-
-
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 function App() {
 
