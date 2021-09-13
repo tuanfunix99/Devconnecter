@@ -30,7 +30,7 @@ const Profile = (props) => {
       <div className="profile-top bg-primary p-2">
         <img
           className="round-img my-1"
-          src={singleProfile.user.avatar ? singleProfile.user.avatar : ""}
+          src={'/api/auth/get-avatar/' + singleProfile.user._id}
           alt={singleProfile.user.name ? singleProfile.user.name : ""}
         />
         <h1 className="large">

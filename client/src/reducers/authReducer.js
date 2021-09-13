@@ -46,6 +46,9 @@ const authSlice = createSlice({
         isAuthenticated: true,
       };
     },
+    uploadAvatar: (state) => {
+      return state
+    }
   },
 });
 

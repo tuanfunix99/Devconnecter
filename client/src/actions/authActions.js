@@ -1,5 +1,5 @@
 import { authActions } from "../reducers/authReducer";
-import { register, loadUser, loginApi } from "../api/data";
+import { register, loadUser, loginApi, uploadAvatar } from "../api/data";
 import setAuthToken from "../utils/setAuthToken";
 
 const createUser = ({ name, email, password}) => async (dispatch) => {
@@ -40,10 +40,23 @@ const login = ({ email, password }) => async (dispatch) => {
     }
   }
 };
+
+const uploadAva = (file) => async dispatch => {
+  try {
+    await uploadAvatar(file);
+    return dispatch(authActions.uploadAvatar());
+  } catch (e) {
+    authActions.authFail();
+    if(e.response && e.response.data){
+      alert(e.response.data);
+    }
+  }
+}
+
 const authAction = {
   createUser,
   fetchUser,
-  login
+  login,
+  uploadAva
 };
-
 export default authAction;

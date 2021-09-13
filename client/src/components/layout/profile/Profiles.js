@@ -20,7 +20,7 @@ const Profiles = () => {
           <div className="profile bg-light" key={key}>
             <img
               className="round-img"
-              src={profile.user.avatar}
+              src={'/api/auth/get-avatar/' + profile.user._id}
               alt={profile.user.name}
             />
             <div>

@@ -216,6 +216,8 @@ img {
 
 .round-img {
   border-radius: 50%;
+  width: 240px;
+    height: 240px;
 }
 
 .line {
@@ -381,7 +383,8 @@ button {
 }
 
 .profile-top img {
-  width: 250px;
+  width: 240px;
+  height: 240px;
 }
 
 .profile-top .icons a {

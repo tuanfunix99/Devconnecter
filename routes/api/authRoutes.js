@@ -9,7 +9,6 @@ const { body } = require('express-validator');
 //Instantiate router
 const router = express.Router();
 
-
 //router get auth
 router.get('/', auth, authControllers.getUser);
 
@@ -21,6 +20,12 @@ authControllers.login);
 
 //router logout
 router.get('/logout/:id', authControllers.logout);
+
+//router upload avatar
+router.post('/upload-avatar', auth, authControllers.uploadAvatar);
+
+//router get avatar
+router.get('/get-avatar/:id', authControllers.getAvatar);
 
 //export the module
 module.exports = router;

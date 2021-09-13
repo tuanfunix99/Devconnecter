@@ -4,16 +4,29 @@ const userRoutes = require("./routes/api/userRoutes");
 const authRoutes = require("./routes/api/authRoutes");
 const profileRoutes = require("./routes/api/profileRoutes");
 const postRoutes = require("./routes/api/postRoutes");
+const multer = require("multer");
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 require("./data/db");
 
 //variables default
 const PORT = process.env.PORT || 8080;
+const fileStorage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "images");
+  },
+  filename: (req, file, callback) => {
+    callback(null, uuidv4());
+  },
+});
 
 //Intanstiate app
 const app = express();
 
 app.use(express.json());
+
+//use multer
+app.use(multer({ storage: fileStorage }).single("avatar"));
 
 //use routes
 app.use("/api/user", userRoutes);

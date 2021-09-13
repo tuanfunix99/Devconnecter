@@ -25,3 +25,6 @@ export const deletExperienceProfile = (experienceId) =>
 
 export const deleteEducationProfile = (educationId) =>
   axios.delete(`/api/profile/education/${educationId}`);
+
+export const uploadAvatar = (file) =>
+  axios.post("/api/auth/upload-avatar", file);

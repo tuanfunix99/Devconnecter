@@ -7,6 +7,7 @@ import CreateProfile from "./CreateProfile";
 import EditProfile from "./EditProfile";
 import AddExperience from "./AddExperience";
 import AddEducation from "./AddEducation";
+import UploadProfile from "./UploadProfile";
 
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth);
@@ -14,6 +15,7 @@ const Dashboard = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [isexp, setIsExp] = useState(false);
   const [isedu, setIsEdu] = useState(false);
+  const [isava, setIsAva] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,6 +34,9 @@ const Dashboard = () => {
       setIsExp(!isexp);
     } else if (cpn === "isedu") {
       setIsEdu(!isedu);
+    }
+    else if(cpn === "isava"){
+      setIsAva(!isava)
     }
   };
 
@@ -62,12 +67,17 @@ const Dashboard = () => {
     dispatch(allActions.profileAction.deleteEducation(eduId));
   };
 
+  const onUploadAvatarHandler = (file) => {
+    dispatch(allActions.authAction.uploadAva(file))
+    setIsAva(!isava)
+  }
+
   return (
     <div>
       {!isProfile && (
         <CreateProfile onSubmit={(profile) => onSubmit(profile)} />
       )}
-      {isProfile && !isEdit && !isexp && !isedu && (
+      {isProfile && !isEdit && !isexp && !isedu && !isava && (
         <ProfileUser
           onShow={(cpn) => onShow(cpn)}
           profile={profile}
@@ -92,6 +102,12 @@ const Dashboard = () => {
         <AddEducation
           onShow={(cpn) => onShow(cpn)}
           onAdd={onAddEducationHandler}
+        />
+      )}
+      {isava && (
+        <UploadProfile
+          onShow={(cpn) => onShow(cpn)}
+          onUp={onUploadAvatarHandler}
         />
       )}
     </div>

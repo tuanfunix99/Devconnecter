@@ -61,6 +61,12 @@ const ProfileUser = (props) => {
           <i className="fas fa-user-circle text-primary"></i> Edit Profile
         </button>
         <button
+          onClick={(cpn) => props.onShow("isava")}
+          className="btn btn-light"
+        >
+          <i className="fas fa-camera text-primary"></i> Upload avatar
+        </button>
+        <button
           onClick={(cpn) => props.onShow("isexp")}
           className="btn btn-light"
         >
