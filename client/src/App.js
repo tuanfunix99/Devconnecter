@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from "react";
 import "./App.css";
-import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
+import Navbar from "./components/layout/nav/Navbar";
+import Landing from "./components/layout/nav/Landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import Dashboard from './components/layout/Dashboard';
+import Dashboard from './components/layout/dashboard/Dashboard';
 import Verify from "./components/auth/Verify";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import allActions from "./actions/allActions";
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";

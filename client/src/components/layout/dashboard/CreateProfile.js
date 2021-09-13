@@ -146,9 +146,6 @@ const CreateProfile = (props) => {
           <input onBlur={(e) => onChangeFormData(e)} type="text" placeholder="Instagram URL" name="instagram" />
         </div>
         <input type="submit" className="btn btn-primary my-1" />
-        <a className="btn btn-light my-1" href="dashboard.html">
-          Go Back
-        </a>
       </form>
     </section>
   );

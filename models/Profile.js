@@ -29,13 +29,8 @@ const profileSchema = new Schema(
       required: true,
     },
     skills: {
-      type: [String],
-      required: true,
-      validate(value){
-        if(value.length <= 0){
-          throw new Error("Skills is required")
-        }
-      }
+      type: String,
+      required: true
     },
     bio: {
       type: String,

@@ -1,7 +1,7 @@
 //Dependencies
 const Profile = require("../models/Profile");
 const User = require("../models/User");
-const ObjectId = require('mongodb').ObjectId;
+const ObjectId = require("mongodb").ObjectId;
 
 //controller get profile user
 exports.getProfile = async (req, res, next) => {
@@ -35,35 +35,36 @@ exports.postProfile = async (req, res, next) => {
   const profileFields = {};
   profileFields.user = req.user.id;
   if (req.body.handle) profileFields.handle = req.body.handle;
-  if (req.body.company) profileFields.company = req.body.company;
-  if (req.body.website) profileFields.website = req.body.website;
-  if (req.body.location) profileFields.location = req.body.location;
-  if (req.body.bio) profileFields.bio = req.body.bio;
-  if (req.body.status) profileFields.status = req.body.status;
-  if (req.body.githubusername)
-    profileFields.githubusername = req.body.githubusername;
-  // Skills - Spilt into array
-  if (typeof req.body.skills != "undefined") {
-    profileFields.skills = req.body.skills.trim().split(",");
-  }
+  profileFields.company = req.body.company;
+  profileFields.website = req.body.website;
+  profileFields.location = req.body.location;
+  profileFields.bio = req.body.bio;
+  profileFields.status = req.body.status;
+  profileFields.githubusername = req.body.githubusername;
+  profileFields.skills = req.body.skills;
 
   // Social
   profileFields.social = {};
-  if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
-  if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-  if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-  if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
-  if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+  profileFields.social.youtube = req.body.youtube;
+  profileFields.social.twitter = req.body.twitter;
+  profileFields.social.facebook = req.body.facebook;
+  profileFields.social.linkedin = req.body.linkedin;
+  profileFields.social.instagram = req.body.instagram;
 
   try {
     let profile = await Profile.findOne({ user: req.user._id }).populate(
       "user"
     );
     if (profile) {
-      profile = await Profile.findOneAndUpdate(
-        { user: req.user._id },
-        { $set: { profileFields } }
-      ).populate("user", ["name", "avatar"]);
+      profile.social = profileFields.social;
+      profile.company = profileFields.company;
+      profile.website = profileFields.website;
+      profile.location = profileFields.location;
+      profile.bio = profileFields.bio;
+      profile.status = profileFields.status;
+      profile.githubusername = profileFields.githubusername;
+      profile.skills = profileFields.skills;
+
       await profile.save();
       return res.status(201).send(profile);
     }
@@ -80,15 +81,18 @@ exports.postProfile = async (req, res, next) => {
 exports.putExperienceProfile = async (req, res, next) => {
   try {
     const newExp = {
-        title: req.body.title,
-        company: req.body.company,
-        location: req.body.location,
-        from: req.body.from,
-        to: req.body.to,
-        current: req.body.current,
-        description: req.body.description,
-      };
-    const profile = await Profile.findOne({ user: req.user._id });
+      title: req.body.title,
+      company: req.body.company,
+      location: req.body.location,
+      from: req.body.from,
+      to: req.body.to,
+      current: req.body.current,
+      description: req.body.description,
+    };
+    const profile = await Profile.findOne({ user: req.user._id }).populate(
+      "user",
+      ["name", "avatar"]
+    );
     profile.experience.unshift(newExp);
     await profile.save();
     res.status(201).send(profile);
@@ -96,7 +100,6 @@ exports.putExperienceProfile = async (req, res, next) => {
     res.status(401).send(error.message);
   }
 };
-
 
 //controller put education
 exports.putEducationProfile = async (req, res, next) => {
@@ -108,7 +111,7 @@ exports.putEducationProfile = async (req, res, next) => {
       from: req.body.from,
       to: req.body.to,
       current: req.body.current,
-      description: req.body.description
+      description: req.body.description,
     };
     const profile = await Profile.findOne({ user: req.user._id });
     profile.education.unshift(newEdu);
@@ -118,7 +121,6 @@ exports.putEducationProfile = async (req, res, next) => {
     res.status(401).send(error.message);
   }
 };
-
 
 //controller delete profile
 exports.deleteProfile = async (req, res, next) => {
@@ -136,26 +138,30 @@ exports.deleteProfile = async (req, res, next) => {
 
 //controller delete experience
 exports.deleteExperience = async (req, res, next) => {
-    const experienceId = req.params.id;
-    try {
-        const profile = await Profile.findOne({ user: req.user._id });
-        profile.experience = profile.experience.filter(exp => exp._id != experienceId);
-        await profile.save();
-        res.status(200).send(profile);
-    } catch (error) {
-        res.status(401).send(error.message);
-    }
-}
+  const experienceId = req.params.id;
+  try {
+    const profile = await Profile.findOne({ user: req.user._id });
+    profile.experience = profile.experience.filter(
+      (exp) => exp._id != experienceId
+    );
+    await profile.save();
+    res.status(200).send(profile);
+  } catch (error) {
+    res.status(401).send(error.message);
+  }
+};
 
 //controller delete education
 exports.deleteEducation = async (req, res, next) => {
   const educationId = req.params.id;
   try {
-      const profile = await Profile.findOne({ user: req.user._id });
-      profile.education = profile.education.filter(exp => exp._id != educationId);
-      await profile.save();
-      res.status(200).send(profile);
+    const profile = await Profile.findOne({ user: req.user._id });
+    profile.education = profile.education.filter(
+      (edu) => edu._id != educationId
+    );
+    await profile.save();
+    res.status(200).send(profile);
   } catch (error) {
-      res.status(401).send(error.message);
+    res.status(401).send(error.message);
   }
-}
+};
