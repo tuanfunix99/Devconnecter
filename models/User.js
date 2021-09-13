@@ -43,6 +43,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
+      default: ""
     },
     verify: {
       type: Boolean,
@@ -88,18 +89,6 @@ userSchema.methods.toJSON = function () {
   delete userJson.password;
   return userJson;
 };
-
-//set avatar
-userSchema.pre("save", function (next) {
-  const user = this;
-  const avatar = gravatar.url(user.email, {
-    s: "200",
-    r: "pg",
-    d: "mm",
-  });
-  user.avatar = avatar;
-  next();
-});
 
 //crypto password
 userSchema.pre("save", async function (next) {
