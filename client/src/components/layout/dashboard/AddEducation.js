@@ -28,6 +28,7 @@ const AddEducation = (props) => {
     props.onAdd(edu);
   };
 
+
   return (
     <section className="container">
       <h1 className="large text-primary">Add Your Education</h1>
@@ -74,7 +75,7 @@ const AddEducation = (props) => {
               onChange={(e) => onChangeHandler(e)}
               type="checkbox"
               name="current"
-              value=""
+              value={isCurrent}
             />{" "}
             Current School or Bootcamp
           </p>

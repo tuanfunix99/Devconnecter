@@ -6,6 +6,8 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from './components/layout/dashboard/Dashboard';
 import Verify from "./components/auth/Verify";
+import Profiles from './components/layout/profile/Profiles'
+import Profile from './components/layout/profile/Profile'
 import { useDispatch } from 'react-redux';
 import allActions from "./actions/allActions";
 
@@ -28,6 +30,8 @@ function App() {
           <Route path="/register" exact component={Register} />
           <Route path="/verify" exact component={Verify} />
           <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/profiles" exact component={Profiles} />
+          <Route path="/profile/:id" exact component={Profile} />
         </Switch>
       </Fragment>
     </Router>

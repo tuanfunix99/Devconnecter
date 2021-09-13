@@ -11,8 +11,11 @@ const router = express.Router();
 //router get profile
 router.get('/user', auth, profileControllers.getProfile);
 
+//router get profile
+router.get('/user/:id', profileControllers.getSingleProfile);
+
 //router get all profile
-router.get('/', auth, profileControllers.getAllProfile);
+router.get('/', profileControllers.getAllProfile);
 
 //router create new profile
 router.post('/', auth, profileControllers.postProfile);

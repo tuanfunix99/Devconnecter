@@ -5,8 +5,21 @@ import {
   addExperienceProfile,
   addEducationProfile,
   deletExperienceProfile,
-  deleteEducationProfile
+  deleteEducationProfile,
+  loadAllProfile,
+  loadSingleProfile
 } from "../api/data";
+
+const getAllProfile = () => async dispatch => {
+  try {
+    const { data } = await loadAllProfile();
+    return dispatch(profileActions.getAllProfile(data));
+  } catch (e) {
+    if (e.response && e.response.data) {
+      alert(e.response.data);
+    }
+  }
+}
 
 const getProfileUser = () => async (dispatch) => {
   try {
@@ -18,6 +31,18 @@ const getProfileUser = () => async (dispatch) => {
     }
   }
 };
+
+const getSingleProfile = (id) => async (dispatch) => {
+  try {
+    const { data } = await loadSingleProfile(id);
+    return dispatch(profileActions.getSingleProfile(data));
+  } catch (e) {
+    if (e.response && e.response.data) {
+      alert(e.response.data);
+    }
+  }
+};
+
 
 const createProfileUser = (profile) => async (dispatch) => {
   try {
@@ -81,7 +106,9 @@ const profileAction = {
   addExperience,
   addEducation,
   deleteExperience,
-  deleteEducation
+  deleteEducation,
+  getAllProfile,
+  getSingleProfile
 };
 
 export default profileAction;

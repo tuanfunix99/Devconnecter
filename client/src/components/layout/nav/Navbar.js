@@ -22,7 +22,7 @@ const Navbar = () => {
         </h1>
         <ul>
           <li>
-            <Link to="profiles.html">Developers</Link>
+            <Link to="/profiles">Developers</Link>
           </li>
           {!auth.isAuthenticated && (
             <li>
@@ -32,6 +32,11 @@ const Navbar = () => {
           {auth.isAuthenticated && (
             <li>
               <Link to="/dashboard">Dashboard</Link>
+            </li>
+          )}
+          {auth.isAuthenticated && (
+            <li>
+              <Link to="/dashboard">Post</Link>
             </li>
           )}
           {auth.isAuthenticated && (

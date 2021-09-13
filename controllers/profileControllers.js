@@ -1,12 +1,29 @@
 //Dependencies
 const Profile = require("../models/Profile");
 const User = require("../models/User");
-const ObjectId = require("mongodb").ObjectId;
+
 
 //controller get profile user
 exports.getProfile = async (req, res, next) => {
   try {
     const profile = await Profile.findOne({ user: req.user._id }).populate(
+      "user",
+      ["name", "avatar"]
+    );
+    if (!profile) {
+      return res.status(200).send({});
+    }
+    res.status(200).send(profile);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+//controller get single profile
+exports.getSingleProfile = async (req, res, next) => {
+  const userId = req.params.id
+  try {
+    const profile = await Profile.findOne({ user: userId }).populate(
       "user",
       ["name", "avatar"]
     );

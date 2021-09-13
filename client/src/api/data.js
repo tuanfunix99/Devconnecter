@@ -6,7 +6,11 @@ export const loginApi = (user) => axios.post("/api/auth", user);
 
 export const loadUser = () => axios.get("/api/auth");
 
+export const loadAllProfile = () => axios.get("/api/profile");
+
 export const loadProfile = () => axios.get("/api/profile/user");
+
+export const loadSingleProfile = (id) => axios.get(`/api/profile/user/${id}`);
 
 export const createProfile = (profile) => axios.post("/api/profile/", profile);
 
