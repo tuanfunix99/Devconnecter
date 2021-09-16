@@ -140,7 +140,7 @@ const Profile = (props) => {
       });
     }
     else{
-        return <h3>Udating...</h3>;
+        return <h3>Updating...</h3>;
     }
   };
 
@@ -169,7 +169,7 @@ const Profile = (props) => {
       });
     }
     else{
-        return <h3>Udating...</h3>;
+        return <h3>Updating...</h3>;
     }
   };
 

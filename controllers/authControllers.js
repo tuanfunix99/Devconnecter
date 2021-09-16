@@ -3,6 +3,8 @@ const User = require("../models/User");
 const { validationResult } = require("express-validator");
 const { removeImage } = require("../utils/DeleteImage");
 const { getPathImages } = require("../utils/PathImage");
+const fs = require("fs");
+const path = require("path");
 
 //controller get user
 exports.getUser = (req, res, next) => {
@@ -87,8 +89,14 @@ exports.getAvatar = async (req, res, next) => {
     }
     if (user.avatar.length <= 0) {
       const imageUrl = "images/" + "icon-default.png";
-      res.sendFile(getPathImages(imageUrl));
+      return res.sendFile(getPathImages(imageUrl));
     } else {
+      const pathImage = path.join(__dirname, "../images", user.avatar);
+      const check = fs.existsSync(pathImage);
+      if (check) {
+        const imageUrl = "images/" + "icon-default.png";
+        return res.sendFile(getPathImages(imageUrl));
+      }
       const imageUrl = "images/" + user.avatar;
       res.sendFile(getPathImages(imageUrl));
     }

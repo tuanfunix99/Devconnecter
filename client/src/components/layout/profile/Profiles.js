@@ -11,8 +11,6 @@ const Profiles = () => {
     dispatch(allActions.profileAction.getAllProfile());
   }, [dispatch]);
 
-  console.log(profiles);
-
   const displayListProfile = () => {
     if (profiles.length > 0) {
       return profiles.map((profile, key) => {
