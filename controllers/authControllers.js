@@ -93,7 +93,7 @@ exports.getAvatar = async (req, res, next) => {
     } else {
       const pathImage = path.join(__dirname, "../images", user.avatar);
       const check = fs.existsSync(pathImage);
-      if (check) {
+      if (!check) {
         const imageUrl = "images/" + "icon-default.png";
         return res.sendFile(getPathImages(imageUrl));
       }
