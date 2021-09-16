@@ -101,6 +101,7 @@ exports.getAvatar = async (req, res, next) => {
       res.sendFile(getPathImages(imageUrl));
     }
   } catch (error) {
-    res.status(404).send(error.message);
+    const imageUrl = "images/" + "icon-default.png";
+    res.sendFile(getPathImages(imageUrl));
   }
 };
